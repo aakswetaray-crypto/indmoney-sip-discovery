@@ -1,0 +1,72 @@
+# SIP-related keywords for filtering collected posts.
+# Latin keywords match whole words, with simple plural/past suffixes
+# (so "sip" catches "SIPs" but does not catch "gossip").
+keywords:
+  # English
+  - sip
+  - systematic investment
+  - autopay
+  - auto pay
+  - auto debit
+  - mandate
+  - e-mandate
+  - emandate
+  - mutual fund
+  - nav value
+  - nav kam
+  - redeem
+  - pause
+  - stopped
+  - bounce
+  - returns
+  - xirr
+
+  # Hinglish (Latin script)
+  - sip band
+  - sip bandh
+  - sip nahi
+  - sip nahi chalu
+  - sip chalu
+  - sip roka
+  - sip rok diya
+  - sip band kar
+  - sip band ho
+  - autopay fail
+  - autopay nahi
+  - mandate fail
+  - mandate cancel
+  - mandate nahi
+  - paise kat
+  - paise kate
+  - paisa kat
+  - paisa kata
+  - paise kata
+  - paise nahi kate
+  - paise atak
+  - paisa atka
+  - paisa phasa
+  - returns kam
+  - return kam
+  - kist
+  - paisa nahi aaya
+  - paise nahi aaye
+
+  # Hindi (Devanagari script)
+  - एसआईपी
+  - एसआईपी बंद
+  - एसआईपी नहीं
+  - एसआईपी रुक
+  - सिप
+  - सिप बंद
+  - सिप नहीं
+  - ऑटोपे
+  - ऑटोपे फेल
+  - मैंडेट
+  - म्यूचुअल फंड
+  - पैसे कट
+  - पैसे नहीं कटे
+  - पैसा कट
+  - रिटर्न कम
+  - रिडीम
+  - किस्त
+  - भुगतान विफल

@@ -1,0 +1,29 @@
+# Fixed form the AI fills for every post. Allowed values only.
+
+# Existing journey / lapse fields
+stage: [considering, just_started, early_2_6m, mid_6_12m, later_12m_plus, unclear]
+action: [continued, paused, reduced, stopped, restarted, none_stated]
+lapse_type: [voluntary, involuntary, not_applicable, unclear]
+trigger: [low_early_returns, market_fall, failed_debit, cash_crunch, app_confusion, outside_advice, lost_interest, other, none_stated]
+emotion: [calm, anxious, confused, frustrated, disappointed, confident, none_stated]
+severity: [1, 2, 3]
+
+# Discovery fields
+start_reason: [influenced_by_others, saving_goal, tax_saving, social_media, app_nudge, other, none_stated]
+expectation: [steady_returns, quick_gains, safe_growth, goal_funding, none_stated]
+check_behaviour: [daily, weekly, monthly, rarely, none_stated]
+app_confusion: [returns_numbers, mandate_autopay, statements, navigation, charges, other, none_stated]
+outside_app_action: [googled, asked_family_friends, watched_youtube, checked_other_app, asked_online_community, none_stated]
+continued_reason: [autopay_habit, long_term_goal, trust_in_advice, none_stated]
+
+# Segment fields: use "unknown" unless the post states it.
+income_stability: [stable, variable, uncertain, other, unknown]
+age_band: ["18-24", "25-34", "35-44", "45-54", "55+", unknown]
+money_source: [salary, business_income, freelance_income, family_support, savings, bonus_or_windfall, loan, other, unknown]
+influencer: [self, family, friend, colleague, social_media, youtube, financial_advisor, bank_rm, other, unknown]
+
+rules:
+  - Tag only what the post states or plainly implies; never infer age, income or intent.
+  - Use none_stated or unknown when the post does not state the field.
+  - evidence_quote is one continuous exact span copied from the post.
+  - No specific fund or stock advice; no fear, FOMO or urgency framing.
