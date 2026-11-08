@@ -907,12 +907,26 @@ def run_streamlit() -> None:
     remaining_runs = max(0, MAX_RUNS_PER_SESSION - runs_used)
 
     with st.sidebar:
-        st.header("Run limits")
-        st.write(f"**{MAX_POSTS_PER_RUN} posts** per run")
-        st.write(f"**{MAX_RUNS_PER_SESSION} runs** per browser session")
-        st.write(f"**{remaining_runs} run(s)** left")
+        st.markdown("### 🔀 Navigation")
+        app_mode = st.radio(
+            "Select View",
+            ["🔍 AI Discovery Engine", "🤖 Deployed AI-Native MVP"],
+            index=0,
+            label_visibility="collapsed",
+        )
         st.divider()
-        st.write(f"**{BATCH_SIZE} posts** per API request")
+        if app_mode == "🔍 AI Discovery Engine":
+            st.header("Run limits")
+            st.write(f"**{MAX_POSTS_PER_RUN} posts** per run")
+            st.write(f"**{MAX_RUNS_PER_SESSION} runs** per browser session")
+            st.write(f"**{remaining_runs} run(s)** left")
+            st.divider()
+            st.write(f"**{BATCH_SIZE} posts** per API request")
+        else:
+            st.header("AI-Native MVP Mode")
+            st.markdown("• **Task 1:** Mandate Glitch Diagnosis\n• **Task 2:** Dip Reframe Math\n• **Task 3:** SEBI Regulatory Refusal\n• **Task 4:** 20-Item Golden Set Evals")
+            st.divider()
+
         if model:
             st.write(f"**Model:** `{model}`")
         else:
@@ -939,6 +953,19 @@ def run_streamlit() -> None:
         )
         with st.expander("Models available to this key"):
             st.write(", ".join(f"`{name}`" for name in available_models))
+
+    if app_mode == "🤖 Deployed AI-Native MVP":
+        try:
+            from app.mvp_copilot import render_copilot_mvp
+        except ImportError:
+            from mvp_copilot import render_copilot_mvp
+
+        if not api_key:
+            st.error("No Groq API key found.")
+            st.stop()
+        client = make_client(api_key)
+        render_copilot_mvp(client, model)
+        return
 
     st.header("1. Add posts")
     st.write(
