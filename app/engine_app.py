@@ -924,7 +924,7 @@ def run_streamlit() -> None:
             st.write(f"**{BATCH_SIZE} posts** per API request")
         else:
             st.header("AI-Native MVP Mode")
-            st.markdown("• **Task 1:** Mandate Glitch Diagnosis\n• **Task 2:** Dip Reframe Math\n• **Task 3:** SEBI Regulatory Refusal\n• **Task 4:** 20-Item Golden Set Evals")
+            st.markdown("• **Task 1:** Dip Anxiety & Unit Math\n• **Task 2:** Mandate Clearing & 1-Click Retry\n• **Task 3:** SEBI Advisory Refusal\n• **Benchmark:** 20-Item Golden Set Evals")
             st.divider()
 
         if model:

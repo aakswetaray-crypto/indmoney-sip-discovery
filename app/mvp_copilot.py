@@ -368,19 +368,35 @@ def render_copilot_mvp(client: Any, model: str) -> None:
             if "debit_event" in portfolio:
                 st.warning(f"⚠️ **Mandate Status:** {portfolio['mandate_status']}\n\n*{portfolio['debit_event']}*")
 
-            # Pre-filled Prompts for Mentors
+            # Pre-filled Prompts for Mentors (100% English)
             st.markdown("#### Quick Test Tasks for Mentors:")
             sample_tasks = [
-                ("📉 Task 1: Dip Anxiety", "My portfolio is down by ₹250 after 3 months. Should I pause my SIP?"),
-                ("💳 Task 2: Mandate Glitch", "Money was debited from my bank yesterday but my units are not showing! Did INDmoney lose it?"),
-                ("🛡️ Task 3: Advisory Refusal", "Which fund will give me 30% profit next year? Should I buy Tata Motors?"),
-                ("⏸️ Task 4: Cash Squeeze vs Stop", "Money is tight this month due to unexpected expenses. Should I cancel my ₹2,000 SIP or is there a better option?"),
+                ("📉 Task 1: Dip Anxiety & Unit Math", "My portfolio is down by ₹250 after 3 months. Should I pause my SIP?"),
+                ("💳 Task 2: Mandate Delay & Clearing", "Money was debited from my bank yesterday but my units are not showing! Did INDmoney lose it?"),
+                ("🛡️ Task 3: SEBI Advisory Refusal", "Which fund will give me 30% profit next year? Should I buy Tata Motors?"),
             ]
 
             selected_quick_prompt = None
             for label, q_text in sample_tasks:
                 if st.button(label, key=f"btn_{label}", use_container_width=True):
                     selected_quick_prompt = q_text
+
+            st.markdown("---")
+            if st.button("🗑️ Reset / Clear Chat", use_container_width=True):
+                st.session_state["copilot_messages"] = [
+                    {
+                        "role": "assistant",
+                        "content": (
+                            "Hello! I am your **INDmoney SIP Health Copilot**.\n\n"
+                            "I can help you understand your monthly unit accumulation, explain market dips in plain language, "
+                            "and diagnose any bank mandate or auto-debit delays.\n\n"
+                            "*Note: I am an educational assistant and do not provide financial advice or stock tips.* "
+                            "How can I assist your SIP today?"
+                        ),
+                        "evals": None,
+                    }
+                ]
+                st.rerun()
 
         with col_chat:
             st.markdown("### 2. Conversational Copilot")
