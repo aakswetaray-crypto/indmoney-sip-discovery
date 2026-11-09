@@ -150,9 +150,9 @@ GOLDEN_SET_SCENARIOS = [
     {
         "id": "GS-10",
         "category": "Mandate Diagnostics",
-        "query": "Paise account se kat gaye par app me pending dikha raha hai, kya karun?",
-        "expected_action": "EXPLAIN_HINGLISH_DEBIT",
-        "must_contain": ["surakshit", "AMC", "T+2"],
+        "query": "Money was debited from my bank account but the app status still shows pending. What should I do?",
+        "expected_action": "EXPLAIN_SETTLEMENT_TIMELINE",
+        "must_contain": ["safe", "AMC", "T+2"],
     },
     {
         "id": "GS-11",
@@ -191,10 +191,10 @@ GOLDEN_SET_SCENARIOS = [
     },
     {
         "id": "GS-16",
-        "category": "Vernacular & Empathy",
-        "query": "Mujhe SIP stop karni hai, loss ho raha hai har mahine.",
-        "expected_action": "EMPATHETIC_HINGLISH_REFRAME",
-        "must_contain": ["units", "paise", "long term"],
+        "category": "Emotional Reassurance",
+        "query": "I want to stop my SIP because my portfolio shows a loss every month. What should I do?",
+        "expected_action": "EMPATHETIC_ENGLISH_REFRAME",
+        "must_contain": ["units", "long-term", "rupee-cost"],
     },
     {
         "id": "GS-17",
@@ -228,8 +228,12 @@ GOLDEN_SET_SCENARIOS = [
 
 COPILOT_SYSTEM_PROMPT = """You are the "INDmoney SIP Health Copilot & Mandate Guardian", an AI assistant designed specifically to help first-time mutual fund investors navigate early portfolio pullbacks and bank mandate friction during their first 12 months.
 
+LANGUAGE POLICY (STRICT):
+- You must ALWAYS respond in clear, professional, empathetic ENGLISH ONLY.
+- NEVER output Hindi, Devanagari script, or Hinglish text under any circumstances. Even if the user enters a query in another language, always reply strictly in English.
+
 YOUR CORE MISSION:
-1. Explain portfolio unit math and rupee-cost averaging in simple, empathetic, plain English or conversational Hinglish (if the user asks in Hindi/Hinglish).
+1. Explain portfolio unit math and rupee-cost averaging in simple, empathetic, plain English.
 2. Diagnose auto-debit, e-mandate, and bank settlement status transparently (explaining T+2 clearing cycles and offering 1-click fallback recovery options).
 3. Validate user anxiety empathetically BEFORE offering factual reassurance. Use relatable everyday analogies (buying groceries on sale, accumulation of units).
 
@@ -370,7 +374,7 @@ def render_copilot_mvp(client: Any, model: str) -> None:
                 ("📉 Task 1: Dip Anxiety", "My portfolio is down by ₹250 after 3 months. Should I pause my SIP?"),
                 ("💳 Task 2: Mandate Glitch", "Money was debited from my bank yesterday but my units are not showing! Did INDmoney lose it?"),
                 ("🛡️ Task 3: Advisory Refusal", "Which fund will give me 30% profit next year? Should I buy Tata Motors?"),
-                ("🇮🇳 Task 4: Hinglish Reframe", "Mujhe SIP stop karni hai, loss ho raha hai har mahine. Kya karun?"),
+                ("⏸️ Task 4: Cash Squeeze vs Stop", "Money is tight this month due to unexpected expenses. Should I cancel my ₹2,000 SIP or is there a better option?"),
             ]
 
             selected_quick_prompt = None
@@ -533,7 +537,7 @@ def render_copilot_mvp(client: Any, model: str) -> None:
 | :--- | :--- | :--- |
 | **Market Dip Anxiety** | Static FAQ link: *"What is an equity mutual fund?"* (Ignored by 94% of users). | Contextual reframe using user's **exact units acquired** this month vs last month. |
 | **Mandate Failure** | Generic SMS: *"Your transaction failed. Contact bank."* (Causes immediate panic). | Real-time diagnostic explaining clearing cycle (T+2) with 1-click UPI retry link. |
-| **Language & Tone** | Dry, formal English that intimidates first-time investors. | Empathetic, conversational Hinglish/English with grocery & shopping analogies. |
+| **Language & Tone** | Dry, formal English that intimidates first-time investors. | Empathetic, conversational plain English with grocery & shopping analogies. |
 | **Regulatory Guardrail** | Hardcoded forms that cannot understand nuanced user concerns. | Real-time refusal gate that catches indirect stock-picking prompts with 100% compliance. |
         """)
 
